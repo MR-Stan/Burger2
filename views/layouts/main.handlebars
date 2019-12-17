@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Eat da Burger!</title>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- local css -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <br>
+        <img src="/img/burger.jpg" alt="Cartoon burger" id="burgerImage">
+        <h1 id="mainHeading">Eat da Burger!</h1>
+        <hr>
+        <br>
+        <!-- burger content from index.handlebars -->
+        {{{body}}}
+        <br><br>
+        <!-- new burger form -->
+        <form action="burger/create" method="POST" id"entry">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="form-group col-md-6">
+                    <center><label for="new_burger" class="heading">Order a burger!</label>
+                    </center>
+                    <textarea class="form-control" columns="8" rows="4" id="new_burger" name="burger_name"></textarea>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <center>
+                <button id="submit-button" type="submit" class="btn btn-danger">Place Order</button>
+            </center>
+        </form>
+        <br>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</body>
+
+</html>
