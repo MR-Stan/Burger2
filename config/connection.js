@@ -1,6 +1,7 @@
 require('dotenv').config();
 
-require('dotenv-json')();
+const dotenvJSON = require('dotenv-json')
+dotenvJSON({ path: "./config/.env.json" });
 
 const keys = require('../keys.js');
 
