@@ -2,9 +2,9 @@ const express = require('express');
 
 const router = express.Router();
 
-const burger = require('../models');
+const db = require('../models');
 
-const sequelizeConnection = burger.sequelize;
+const sequelizeConnection = db.sequelize;
 
 sequelizeConnection.sync();
 
@@ -13,27 +13,39 @@ router.get('/', function (req, res) {
     res.redirect('/index');
 });
 
-// index
+// render index with burgers from db
 router.get('/index', function (req, res) {
-    burger.selectAll(function (data) {
-        var hbsObject = { burgers: data };
-        res.render('index', hbsObject);
+    db.selectAll().then(function (result) {
+        const hbsObject = { burger: result };
+        return res.render('index', hbsObject);
     });
 });
 
-// new burger
-router.post('/burger/create', function (req, res) {
-    burger.insertBurger(req.body.burger_name, function () {
+// create burger
+router.post('/db/create', function (req, res) {
+    db.create({
+        name: req.body.burger_name
+    }).then(function (result) {
+        console.log(result);
         res.redirect('/index');
     });
 });
 
 // eat burger
-router.post('/burger/eat/:id', function (req, res) {
-    burger.updateBurger(req.params.id, function () {
-        res.redirect('/index');
-    });
+router.put('/db/eat/:id', function (req, res) {
+    db.update({
+        devoured: true
+    },
+        {
+            where: {
+                devourerId: req.params.id
+            }
+        }).then(function (result) {
+            console.log(result);
+            res.json('/');
+        });
 });
+
 
 
 module.exports = router;
