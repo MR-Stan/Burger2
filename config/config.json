@@ -1,15 +1,14 @@
 {
   "development": {
     "username": "root",
-    "password": process.env.SQLpassword,
-    "database": "database_development",
+    "password": "Esherichia666",
+    "database": "burger_db",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false
   },
-
   "production": {
-  "use_env_variable": "JAWSDB_URL",
-  "dialect": "mysql"
+    "use_env_variable": "JAWSDB_URL",
+    "dialect": "mysql"
   }
 }

@@ -1,6 +1,8 @@
 // npm express
 const express = require('express');
 
+const db = require('./models');
+
 const PORT = process.env.PORT || 8080;
 
 const app = express();
@@ -18,13 +20,15 @@ const exphbs = require('express-handlebars');
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-const router = require('./controllers/burgers_controller.js');
+const routes = require('./controllers/burgers_controller.js');
 
-app.use('/', router);
+app.use(routes);
 
 // start server
-app.listen(PORT, function () {
-    console.log('Server listenting on: http://localhost:' + PORT);
+db.sequelize.sync().then(function () {
+    app.listen(PORT, function () {
+        console.log('Server listenting on: http://localhost:' + PORT);
+    });
 });
 
 
